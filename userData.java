@@ -20,32 +20,40 @@ public class userData extends JFrame {
         setTitle("Riblet Generator");
         setSize(400, 300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(new GridLayout(6, 2));
-
-        // Adding input fields and labels
-        add(new JLabel("Tamanho:"));
-        tField = new JTextField();
-        add(tField);
+        setLayout(new GridBagLayout());
         
-        add(new JLabel("Altura:"));
-        hField = new JTextField();
-        add(hField);
+        // Definindo uma cor de fundo personalizada
+        getContentPane().setBackground(new Color(60, 63, 65));
         
-        add(new JLabel("Angulo:"));
-        angleField = new JTextField();
-        add(angleField);
+        // Definindo fonte e cores para os campos de entrada e rótulos
+        Font labelFont = new Font("Arial", Font.BOLD, 14);
+        Font fieldFont = new Font("Arial", Font.PLAIN, 14);
+        Color labelColor = Color.WHITE;
+        Color fieldBgColor = new Color(43, 43, 43);
+        Color fieldFgColor = Color.WHITE;
         
-        add(new JLabel("dR:"));
-        drField = new JTextField();
-        add(drField);
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(10, 10, 10, 10);  // Espaçamento entre os componentes
+        
+        // Adicionando os rótulos e campos de entrada
+        addLabelAndField("Tamanho:", tField = new JTextField(), gbc, labelFont, labelColor, fieldFont, fieldBgColor, fieldFgColor);
+        addLabelAndField("Altura:", hField = new JTextField(), gbc, labelFont, labelColor, fieldFont, fieldBgColor, fieldFgColor);
+        addLabelAndField("Angulo:", angleField = new JTextField(), gbc, labelFont, labelColor, fieldFont, fieldBgColor, fieldFgColor);
+        addLabelAndField("dR:", drField = new JTextField(), gbc, labelFont, labelColor, fieldFont, fieldBgColor, fieldFgColor);
+        addLabelAndField("dR0:", dr0Field = new JTextField(), gbc, labelFont, labelColor, fieldFont, fieldBgColor, fieldFgColor);
 
-        add(new JLabel("dR0:"));
-        dr0Field = new JTextField();
-        add(dr0Field);
-
+        // Botão "Desenhar Riblets"
         drawButton = new JButton("Desenhar Riblets");
-        add(drawButton);
-
+        drawButton.setFont(new Font("Arial", Font.BOLD, 14));
+        drawButton.setBackground(new Color(75, 110, 175));
+        drawButton.setForeground(Color.WHITE);
+        drawButton.setFocusPainted(false);
+        gbc.gridx = 0;
+        gbc.gridy++;
+        gbc.gridwidth = 2;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        add(drawButton, gbc);
+        
         drawButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -68,8 +76,33 @@ public class userData extends JFrame {
         });
     }
 
+    private void addLabelAndField(String labelText, JTextField textField, GridBagConstraints gbc, Font labelFont, Color labelColor, Font fieldFont, Color fieldBgColor, Color fieldFgColor) {
+        JLabel label = new JLabel(labelText);
+        label.setFont(labelFont);
+        label.setForeground(labelColor);
+        
+        textField.setFont(fieldFont);
+        textField.setBackground(fieldBgColor);
+        textField.setForeground(fieldFgColor);
+        textField.setCaretColor(Color.WHITE);
+        
+        gbc.gridx = 0;
+        gbc.gridy++;
+        gbc.gridwidth = 1;
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.anchor = GridBagConstraints.EAST;
+        add(label, gbc);
+
+        gbc.gridx = 1;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.anchor = GridBagConstraints.WEST;
+        add(textField, gbc);
+    }
+
     public static void main(String[] args) {
-        userData gui = new userData();
-        gui.setVisible(true);
+        SwingUtilities.invokeLater(() -> {
+            userData gui = new userData();
+            gui.setVisible(true);
+        });
     }
 }
