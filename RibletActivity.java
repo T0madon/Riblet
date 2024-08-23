@@ -7,9 +7,19 @@ import javax.swing.JPanel;
 
 public class RibletActivity extends Frame
 {
+    double tam;
+    double h;
+    double alfa;
+    double dR;
+    double dR0;
   //Constructor
-  RibletActivity()
+  RibletActivity(double tam, double h, double alfa, double dR, double dR0)
   {
+    this.tam = tam;
+    this.h = h;
+    this.alfa = alfa;
+    this. dR = dR;
+    this.dR0 = dR0;
     //Enables the closing of the window.
     addWindowListener(new MyFinishWindow());
   }  
@@ -71,7 +81,8 @@ public class RibletActivity extends Frame
     tela.lineTo(50,70);
     g2d.draw(tela);
     
-    geraRiblet(g2d, 1000, 45, 20, 64, 50);
+//    geraRiblet(g2d, 1000, 45, 20, 64, 50);
+    geraRiblet(g2d, tam, h, alfa, dR, dR0);
 
 
     g2d.setStroke(new BasicStroke(1.0f));
@@ -124,8 +135,6 @@ public class RibletActivity extends Frame
     //Reset to the original font.
     g2d.setFont(fo);
   }
-
-
    public static void main(String[] argv)
   {
     double tam = 0;
@@ -134,9 +143,8 @@ public class RibletActivity extends Frame
     double dR = 0;
     double dR0 = 0;
     
-    RibletActivity f = new RibletActivity();
-
-    
+    RibletActivity f = new RibletActivity(tam, h, angulo, dR, dR0);
+                
     f.setTitle("GeneralPath example");
     f.setSize(1920,1080);
     f.setVisible(true);
