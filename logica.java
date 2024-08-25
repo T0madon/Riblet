@@ -1,25 +1,34 @@
-package com.mycompany.riblet.activity.RibletActivity;
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.mycompany.riblet.atividade;
 
 import java.awt.*;
 import java.awt.geom.*;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
-public class RibletActivity extends Frame
-{
+/**
+ *
+ * @author joaod
+ */
+public class logica extends Frame{
+    
     double tam;
     double h;
     double alfa;
     double dR;
     double dR0;
   //Constructor
-  RibletActivity(double tam, double h, double alfa, double dR, double dR0)
+    
+  logica(double tam, double h, double alfa, double dR, double dR0)
   {
     this.tam = tam;
     this.h = h;
     this.alfa = alfa;
     this. dR = dR;
     this.dR0 = dR0;
+    
     //Enables the closing of the window.
     addWindowListener(new MyFinishWindow());
   }  
@@ -81,7 +90,8 @@ public class RibletActivity extends Frame
     tela.lineTo(50,70);
     g2d.draw(tela);
     
-//    geraRiblet(g2d, 1000, 45, 20, 64, 50);
+//    geraRiblet(g2d, 1000, 45, 20, 64, 50); pixels
+
     geraRiblet(g2d, tam, h, alfa, dR, dR0);
 
 
@@ -103,9 +113,9 @@ public class RibletActivity extends Frame
   public static void drawSimpleCoordinateSystem(int xmax, int ymax,
                                                 Graphics2D g2d)
   {
-    int xOffset = 30; //tava 30
-    int yOffset = 50; //tava 50
-    int step = 20; // tava 20
+    int xOffset = 30; 
+    int yOffset = 50; 
+    int step = 20; 
     String s;
     //Remember the actual font.
     Font fo = g2d.getFont();
@@ -143,10 +153,11 @@ public class RibletActivity extends Frame
     double dR = 0;
     double dR0 = 0;
     
-    RibletActivity f = new RibletActivity(tam, h, angulo, dR, dR0);
+    logica f = new logica(tam, h, angulo, dR, dR0);
                 
     f.setTitle("GeneralPath example");
     f.setSize(1920,1080);
     f.setVisible(true);
   }
+    
 }
